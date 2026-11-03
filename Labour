@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Labour Guru - local labour booking in Mavelikara, Kerala" />
+  <title>Labour Guru | Mavelikara, Kerala</title>
+  <style>
+    :root{
+      --ink:#17251f;
+      --muted:#69806d;
+      --cream:#f5f7f2;
+      --green:#d8f26d;
+      --line:#e8ece5;
+      --white:#fff;
+      --olive:#6f8350;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--cream);
+      color:var(--ink);
+    }
+    a, button, input, select { font: inherit; }
+    .container{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 24px;
+    }
+    header{
+      height:76px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--ink);
+      font-weight:800;
+    }
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background:var(--green);
+      display:grid;place-items:center;
+      font-size:13px;font-weight:800;
+    }
+    .brand small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:400;
+      margin-top:3px;
+    }
+    .badge{
+      color:var(--muted);
+      font-size:12px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:30px;
+      align-items:center;
+      padding:60px 0 50px;
+    }
+    .eyebrow{
+      font-size:11px;
+      letter-spacing:1.8px;
+      color:var(--olive);
+      text-transform:uppercase;
+      font-weight:700;
+    }
+    h1{
+      font-size:clamp(42px,6vw,68px);
+      line-height:1.04;
+      margin:16px 0;
+      letter-spacing:-2.5px;
+    }
+    h1 em, h2 em{
+      color:var(--olive);
+      font-style:normal;
+    }
+    .hero p, .intro p{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:15px;
+    }
+    .cta-row{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:46px;
+      padding:12px 18px;
+      border:0;
+      border-radius:10px;
+      background:var(--green);
+      color:var(--ink);
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .notice{
+      margin-top:18px;
+      padding:12px 14px;
+      background:#fff7d5;
+      color:#684b13;
+      border-radius:8px;
+      font-size:12px;
+      line-height:1.5;
+    }
+    .hero-card{
+      min-height:260px;
+      background:#e9eedf;
+      border-radius:18px;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .hero-card .worker{
+      font-size:100px;
+      text-align:center;
+    }
+    .hero-card strong{ font-size:20px; }
+    .hero-card small{ display:block; color:var(--muted); margin-top:5px; }
+    .services{
+      padding:20px 0 50px;
+    }
+    .heading{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:18px;
+    }
+    h2{
+      margin:8px 0 0;
+      font-size:30px;
+      letter-spacing:-1px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+    }
+    .service{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:9px;
+      padding:16px;
+      min-height:90px;
+    }
+    .service strong{
+      display:block;
+      font-size:14px;
+    }
+    .service small{
+      display:block;
+      margin-top:7px;
+      color:var(--muted);
+      font-size:11px;
+    }
+    .request{
+      background:#e9eddf;
+      border-radius:16px;
+      padding:34px;
+      display:grid;
+      grid-template-columns:.75fr 1.25fr;
+      gap:32px;
+      margin-bottom:55px;
+    }
+    .intro h2{
+      font-size:39px;
+      line-height:1.1;
+      margin:8px 0 12px;
+    }
+    .panel{
+      background:var(--white);
+      border-radius:12px;
+      padding:22px;
+    }
+    .tabs{
+      display:flex;
+      gap:10px;
+      border-bottom:1px solid var(--line);
+      padding-bottom:12px;
+      margin-bottom:18px;
+    }
+    .tab{
+      border:0;
+      background:none;
+      color:var(--muted);
+      padding:0 6px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .tab.active{
+      color:var(--ink);
+      font-weight:700;
+      border-bottom:2px solid var(--olive);
+      padding-bottom:10px;
+    }
+    .form{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .full{
+      grid-column:1 / -1;
+    }
+    label{
+      font-size:11px;
+      font-weight:700;
+    }
+    input, select{
+      width:100%;
+      height:42px;
+      border:1px solid var(--line);
+      border-radius:7px;
+      padding:0 10px;
+      background:var(--white);
+      color:var(--ink);
+      font-size:13px;
+    }
+    input:focus, select:focus{
+      outline:2px solid var(--green);
+    }
+    .form .button{
+      grid-column:1 / -1;
+      margin-top:4px;
+    }
+    .hint{
+      grid-column:1 / -1;
+      font-size:11px;
+      color:var(--muted);
+      line-height:1.5;
+      margin:0;
+    }
+    .hidden{ display:none; }
+    footer{
+      min-height:78px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-size:11px;
+      color:var(--muted);
+      padding:14px 0 20px;
+    }
+    .status{
+      margin-top:12px;
+      font-size:12px;
+      color:#8a3d2c;
+      line-height:1.5;
+    }
+    @media (max-width: 760px){
+      .hero{ grid-template-columns:1fr; padding-top:40px; }
+      .grid{ grid-template-columns:repeat(2,1fr); }
+      .request{ grid-template-columns:1fr; padding:22px 16px; }
+      .heading{ flex-direction:column; align-items:flex-start; }
+      footer{ flex-direction:column; align-items:flex-start; }
+    }
+    @media (max-width: 440px){
+      .form{ grid-template-columns:1fr; }
+      .full, .form .button, .hint{ grid-column:auto; }
+      .container{ padding:0 18px; }
+      h1{ font-size:42px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="#" class="brand">
+        <span class="logo">LG</span>
+        <span>Labour Guru<small>Mavelikara, Kerala</small></span>
+      </a>
+      <span class="badge">Local labour booking</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <span class="eyebrow">Local work. Local connections.</span>
+          <h1>Find the right help<br><em>for the work ahead.</em></h1>
+          <p>Request skilled labour for your home or project in Mavelikara and nearby areas. Send a request through WhatsApp.</p>
+          <div class="cta-row">
+            <a href="#request" class="button">Send a request ↘</a>
+          </div>
+          <div class="notice">A request is not a confirmed booking. No online payment is collected here.</div>
+        </div>
+
+        <div class="hero-card">
+          <span class="eyebrow">Your local crew</span>
+          <div class="worker" aria-hidden="true">👷🏽‍♂️</div>
+          <div>
+            <strong>Ready when you are.</strong>
+            <small>Skilled help, close to home.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="services">
+        <div class="heading">
+          <div>
+            <span class="eyebrow">Services</span>
+            <h2>What do you need help with?</h2>
+          </div>
+          <span class="badge">Choose a category in the form</span>
+        </div>
+
+        <div class="grid">
+          <div class="service"><strong>Helper</strong><small>General support</small></div>
+          <div class="service"><strong>Mason</strong><small>Construction & repairs</small></div>
+          <div class="service"><strong>Painter</strong><small>Finishing & walls</small></div>
+          <div class="service"><strong>Plumber</strong><small>Water & pipe work</small></div>
+          <div class="service"><strong>Electrician</strong><small>Wiring & repair</small></div>
+          <div class="service"><strong>Carpenter</strong><small>Woodwork & fittings</small></div>
+          <div class="service"><strong>Tile Worker</strong><small>Floor & tile work</small></div>
+          <div class="service"><strong>Cleaner</strong><small>Home & site cleaning</small></div>
+        </div>
+      </section>
+
+      <section class="request" id="request">
+        <div class="intro">
+          <span class="eyebrow">Get started</span>
+          <h2>Let’s get the<br><em>work moving.</em></h2>
+          <p>Fill in a request or worker form below. The page will open WhatsApp with a ready-made message.</p>
+          <p><strong>Privacy:</strong> Do not include passwords, payment details, or ID documents.</p>
+        </div>
+
+        <div class="panel">
+          <div class="tabs">
+            <button class="tab active" id="book-tab" type="button">I need a worker</button>
+            <button class="tab" id="worker-tab" type="button">I’m a worker</button>
+          </div>
+
+          <form class="form" id="book-form">
+            <div class="field">
+              <label for="category">Work category</label>
+              <select id="category" name="Category">
+                <option>Helper</option>
+                <option>Mason</option>
+                <option>Painter</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>Carpenter</option>
+                <option>Tile Worker</option>
+                <option>Cleaner</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="type">Booking type</label>
+              <select id="type" name="Booking type">
+                <option>Per day</option>
+                <option>Per hour</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="date">Preferred date</label>
+              <input id="date" name="Preferred date" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="amount">Estimated budget (₹)</label>
+              <input id="amount" name="Estimated budget" type="number" min="1" step="1" placeholder="e.g. 800" required />
+            </div>
+
+            <div class="field full">
+              <label for="address">Work address / area</label>
+              <input id="address" name="Work address / area" maxlength="250" required placeholder="Mavelikara, Kerala" />
+            </div>
+
+            <div class="field">
+              <label for="payment">Payment preference</label>
+              <select id="payment" name="Payment preference">
+                <option>Cash</option>
+                <option>UPI (not processed online)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="details">Work details (optional)</label>
+              <input id="details" name="Work details" maxlength="400" placeholder="Brief description" />
+            </div>
+
+            <button class="button" type="submit">Continue to WhatsApp ↗</button>
+            <p class="hint">WhatsApp will open with your message. Press Send to submit the request.</p>
+          </form>
+
+          <form class="form hidden" id="worker-form">
+            <div class="field full">
+              <label for="name">Full name</label>
+              <input id="name" name="Name" maxlength="100" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="Phone" type="tel" maxlength="20" required placeholder="+91 98765 43210" />
+            </div>
+
+            <div class="field">
+              <label for="worker-category">Work category</label>
+              <select id="worker-category" name="Category">
+                <option>Helper</option>
+                <option>Mason</option>
+                <option>Painter</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>Carpenter</option>
+                <option>Tile Worker</option>
+                <option>Cleaner</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="rate">Rate per day (₹)</label>
+              <input id="rate" name="Rate per day" type="number" min="0" step="1" required />
+            </div>
+
+            <div class="field">
+              <label for="experience">Experience (years)</label>
+              <input id="experience" name="Experience" type="number" min="0" max="70" required />
+            </div>
+
+            <div class="field full">
+              <label for="area">Service area</label>
+              <input id="area" name="Service area" value="Mavelikara, Kerala" maxlength="200" required />
+            </div>
+
+            <button class="button" type="submit">Continue to WhatsApp ↗</button>
+            <p class="hint">Worker applications are only reviewed after submission.</p>
+          </form>
+
+          <div id="status" class="status" role="status"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="brand">
+        <span class="logo">LG</span>
+        <span>Labour Guru<small>Mavelikara, Kerala</small></span>
+      </div>
+      <span>Local skills, local needs.</span>
+      <span>Online payment is not enabled.</span>
+    </footer>
+  </div>
+
+  <script>
+    const WHATSAPP_NUMBER = "917079242207";
+
+    const bookTab = document.getElementById("book-tab");
+    const workerTab = document.getElementById("worker-tab");
+    const bookForm = document.getElementById("book-form");
+    const workerForm = document.getElementById("worker-form");
+    const status = document.getElementById("status");
+
+    function chooseTab(isWorker) {
+      bookForm.classList.toggle("hidden", isWorker);
+      workerForm.classList.toggle("hidden", !isWorker);
+      bookTab.classList.toggle("active", !isWorker);
+      workerTab.classList.toggle("active", isWorker);
+      status.textContent = "";
+    }
+
+    bookTab.addEventListener("click", () => chooseTab(false));
+    workerTab.addEventListener("click", () => chooseTab(true));
+
+    function sendToWhatsApp(form, title) {
+      if (!/^[0-9]{10,15}$/.test(WHATSAPP_NUMBER)) {
+        status.textContent = "Please set a valid WhatsApp number in the script before publishing.";
+        return;
+      }
+
+      const lines = [title];
+      const data = new FormData(form);
+
+      for (const [key, value] of data.entries()) {
+        const val = String(value).trim();
+        if (val) lines.push(`${key}: ${val}`);
+      }
+
+      lines.push("", "This is a request only; please confirm availability and price.");
+
+      const message = encodeURIComponent(lines.join("\n"));
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank", "noopener");
+    }
+
+    bookForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!bookForm.reportValidity()) return;
+      sendToWhatsApp(bookForm, "Labour Guru — New Booking Request");
+    });
+
+    workerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!workerForm.reportValidity()) return;
+      sendToWhatsApp(workerForm, "Labour Guru — Worker Application");
+    });
+
+    const today = new Date();
+    const dateInput = document.getElementById("date");
+    dateInput.min = [
+      today.getFullYear(),
+      String(today.getMonth() + 1).padStart(2, "0"),
+      String(today.getDate()).padStart(2, "0")
+    ].join("-");
+  </script>
+</body>
+</html>
