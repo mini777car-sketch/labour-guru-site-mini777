@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && request.auth.token.admin == true; }
+
+    match /users/{uid} {
+      allow read, create, update: if signedIn() && request.auth.uid == uid;
+      allow delete: if isAdmin();
+    }
+
+    match /workerApplications/{applicationId} {
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'phone', 'category', 'rate', 'experience', 'area', 'status', 'createdAt']);
+      allow read: if (signedIn() && resource.data.uid == request.auth.uid) || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if signedIn()
+        && request.resource.data.customerUid == request.auth.uid
+        && request.resource.data.status == 'requested'
+        && request.resource.data.keys().hasOnly(['customerUid', 'category', 'bookingType', 'date', 'address', 'amount', 'paymentChoice', 'details', 'status', 'createdAt']);
+      allow read: if (signedIn() && resource.data.customerUid == request.auth.uid) || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.customerUid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['customerUid', 'bookingId', 'rating', 'comment', 'createdAt']);
+      allow update, delete: if isAdmin();
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}
